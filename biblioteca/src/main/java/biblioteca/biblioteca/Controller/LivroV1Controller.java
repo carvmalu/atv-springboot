@@ -14,45 +14,47 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/v1/livros", produces = MediaType.APPLICATION_JSON_VALUE)
-public class AutorV1Controller {
+public class LivroV1Controller {
 
     @Autowired
     LivroCrudService livroCrudService;
 
     @PostMapping("")
-    public ResponseEntity<AutorResponseDto> criarAutor(
-            @RequestBody @Valid AutorPostPutDto autorPostPutDto) {
+    public ResponseEntity<LivroResponseDto> criarLivro(
+            @RequestBody @Valid LivroPostPutDto livroPostPutDto) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(autorCrudService.criarAutor(autorPostPutDto));
+                .body(livroCrudService.criarLivro(livroPostPutDto));
     }
 
     @GetMapping("")
-    public ResponseEntity<List<AutorResponseDto>> buscarTodosAutores() {
+    public ResponseEntity<List<LivroResponseDto>> buscarLivros(
+            @RequestParam(required = false) String isbn,
+            @RequestParam(required = false) String titulo) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(autorCrudService.buscarTodosAutores());
+                .body(livroCrudService.buscarLivros(isbn, titulo));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AutorResponseDto> buscarAutor(@PathVariable Long id) {
+    public ResponseEntity<LivroResponseDto> buscarLivro(@PathVariable Long id) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(autorCrudService.buscarAutor(id));
+                .body(livroCrudService.buscarLivro(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AutorResponseDto> atualizarAutor(
+    public ResponseEntity<LivroResponseDto> atualizarLivro(
             @PathVariable Long id,
-            @RequestBody @Valid AutorPostPutDto autorPostPutDto) {
+            @RequestBody @Valid LivroPostPutDto livroPostPutDto) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(autorCrudService.atualizarAutor(id, autorPostPutDto));
+                .body(livroCrudService.atualizarLivro(id, livroPostPutDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> removerAutor(@PathVariable Long id) {
-        autorCrudService.removerAutor(id);
+    public ResponseEntity<Void> removerLivro(@PathVariable Long id) {
+        livroCrudService.removerLivro(id);
         return ResponseEntity
                 .status(HttpStatus.NO_CONTENT)
                 .build();

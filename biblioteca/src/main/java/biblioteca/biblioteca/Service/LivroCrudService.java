@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface LivroCrudService {
 
-    LivroResponseDto criarLivro(LivroPostPutDto LivroPostPutDto);
+    LivroResponseDto criarLivro(LivroPostPutDto livroPostPutDto);
 
-    List<LivroResponseDto> buscarTodosLivros();
+    List<LivroResponseDto> buscarLivros(String isbn, String titulo);
 
-    LivroResponseDto buscarLivro(Long IBSN);
+    LivroResponseDto buscarLivro(Long id);
 
-    LivroResponseDto atualizarLivro(Long IBSN, LivroPostPutDto LivroPostPutDto);
+    LivroResponseDto atualizarLivro(Long id, LivroPostPutDto livroPostPutDto);
 
-    void removerLivro(Long IBSN);
+    void removerLivro(Long id);
 }
